@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Homepage</title>
+
+    <style>
+        body{
+            background:rgba(30,30,255,0.5);
+        }
+        h1{
+            font-family: 'Times New Roman', Times, serif;
+            
+        }
+        h1 a{
+            text-decoration: none;
+            color:rgb(30,30,255);
+    
+        }
+    
+        hr{
+            color:black
+        }
+
+        a{
+            text-decoration: none;
+            color:rgb(0, 0, 83);
+        }
+
+        a:hover{
+            color: white;
+           
+        }
+        .flex{
+            display: flex;
+            align-items: center;
+        }
+        .spacer{
+            flex:1;
+        }
+
+        .button{
+            text-align: center;
+            border:none;
+            border-radius:25px;
+            width:120px;
+            height:30px;
+            transition: all .5s;
+            color:black;
+            cursor: pointer;
+            background: white;
+            padding-top:6px;
+            transition:all 1s;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .button:hover{
+            background: black;
+            color:white;
+        }
+        </style>    
+</head>
+<body>
+    <div class="flex">
+    <h1><a href="">Website</a> <a href="{% url 'shop:index' %}">Shop</a></h1>
+    <div class="spacer"></div>
+    <a class="button" href="{% url 'post:new_post' %}">New Post</a></p>
+    </div>
+    <hr>
+    {% for post in posts %}
+    <h2><b><a href="{% url 'post:post' pk=post.pk %}">{{post.title}}</a></b></h2>
+    <p>{{post.text}}</p>
+    <em><p>Added by: <a href="{% url 'post:user' pk=post.who_wrote_it.pk %}">{{post.who_wrote_it}}</a></p></em>
+    <hr>
+    {% endfor %}
+</body>
+</html>

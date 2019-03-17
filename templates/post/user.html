@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{user.username}}</title>
+    <style>
+        body{
+            background:rgba(30,30,255,0.5);
+        }
+        h1{
+            font-family: 'Times New Roman', Times, serif;
+            text-transform: uppercase;
+        }
+        h1 a{
+            text-decoration: none;
+            color:rgb(30,30,255);
+            transition: all 0.5s;
+
+        }
+
+        h1 a:hover{
+            color:white;
+        }
+
+        h2{
+            text-transform: uppercase;  
+        }
+
+        .followBTN{
+            border:none;
+            border-radius:25px;
+            width:90px;
+            height:30px;
+            transition: all .5s;
+            color:black;
+            cursor: pointer;
+        }
+
+        .followBTN:hover{
+            background:rgba(0,0,0,0.9);
+            color:white;
+        }
+
+        hr{
+            color:black;
+        }
+        
+
+    </style>  
+</head>
+<body>
+    <h1><a href="/">Twitter</a></h1>
+    <hr>
+    
+        <h2>{{user.username}}</h2>
+        <p>{{user.profile_description}}</p>
+        <p>Profile created in {{user.created_date}}</p>
+
+        <p>Followers count: <b>{{user.followers_count}}</b></p>
+        <form action="{% url 'post:follow' user.pk %}">
+            {% csrf_token %}
+            <input class="followBTN" type="submit" value="follow" />
+        </form>
+
+    
+    <h2>POSTS</h2>
+   
+    {% for post in posts %}
+        <div style="border:1px solid black" class='ramka'></div>
+            <h3><a href="{% url 'post:post' pk=post.pk %}">{{post.title}}</a></h3>
+            <p>{{post.text}}</p>
+            <p> Published in: {{post.posted_date}}</p>
+            <p>{{post.like_count}} likes</p>
+        </div>
+        
+    {% endfor %}
+
+
+</body>
+</html>

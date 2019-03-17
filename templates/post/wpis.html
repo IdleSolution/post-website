@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body{
+        background:rgba(30,30,255,0.5);
+    }
+    h1{
+        font-family: 'Times New Roman', Times, serif;
+        
+    }
+    h1 a{
+        text-decoration: none;
+        color:rgb(30,30,255);
+        transition: all 0.5s;
+
+    }
+
+    h1 a:hover{
+        color:white;
+    }
+    hr{
+        color:black;
+    }
+
+    .lickBTN{
+        border:none;
+        border-radius:25px;
+        width:90px;
+        height:30px;
+        transition: all .5s;
+        color:black;
+        cursor: pointer;
+    }
+
+    .lickBTN:hover{
+        background:rgba(0,0,0,0.9);
+        color:white;
+    }
+    </style>
+</head>
+<body>
+    <h1><a href="/">Twitter</a></h1>
+    <hr>
+    <b><h2>{{post.title}}</h2></b>
+    <p><a href="{% url 'post:edit_post' post.pk %}">Edit Post</a></p>
+    <p>{{post.text}}</p>
+    <form action="{%url 'post:like' post.pk%}">
+            {%csrf_token%}
+            <input type="submit" class='lickBTN' value="lick" />
+    </form>
+
+    <p>LIKE COUNT: {{post.like_count}}</p>
+    <em><p>Post published in: {{post.posted_date}} by <a href="{% url 'post:user' pk=post.who_wrote_it.pk %}">{{post.who_wrote_it}}</a></p></em>
+
+    <script>
+        let lick = document.querySelector('.lickBTN');
+
+        lick.addEventListener('click',function(){
+            alert('You liked post');
+        })
+    </script>
+    <form action='{% url "post:delete_post" post.pk %}'
+    {%csrf_token%}
+    <input type="submit" class='lickBTN' value="remove" />
+    </form>
+</body>
+</html>

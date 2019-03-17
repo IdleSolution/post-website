@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1><a href="/">Twitter</a></h1>
+    <h2>Przedmioty wystawione na sprzedaż</h2>
+    {% for item in items %}
+    <div>
+    <h3><a href="{% url 'shop:item' pk=item.pk %}">{{item.name}}</a></h3>
+    <p>{{item.description}}</p>
+    <p><em>Price: {{item.price}} PLN</em></p>
+    {% endfor %}
+
+    </div>
+</body>
+</html>
